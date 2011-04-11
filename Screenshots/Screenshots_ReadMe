@@ -1,0 +1,50 @@
+Hi,
+
+Disclaimer: This code has been modified from code from Apple in QA1702, QA1703, QA1704, and QA1714.
+
+The code does not come with any guarantees, warrantees, or even vague promises that it will work for you. It might. And if it does, then I am very happy, as I am sure you are. If it does not, then my apologies.
+
+Should you make any changes to this code to make it work better, please email those changes to me at jimhillhouse@me.com so that others might benefit as the code evolves into something better than what I could construct.
+
+Thanks and good luck,
+
+Jim
+
+
+
+REVIEW OF APPLE SUPPLIED TECHNICAL DOCUMENTATION IN SUPPORT OF SCREEN/IMAGE CAPTURE
+
+
+In Technical Q&A 1702 "How to capture video frames from the camera as images using AV Foundation",
+
+http:developer.apple.com/library/ios/#qa/qa2010/qa1702.html
+
+Apple shows how to capture video frames from the camera as images using AV Foundation.
+
+
+In Technical Q&A 1703 "Screen Capture in UIKit Applications",
+
+http:developer.apple.com/library/ios/#qa/qa2010/qa1703.html
+
+Apple shows how to take a screenshot in an UIKit application.
+
+
+In Technical Q&A 1704 "OpenGL ES View Snapshot",
+
+http:developer.apple.com/library/ios/#qa/qa2010/qa1714.html
+
+Apple demonstrates how to take a snapshot of my OpenGL ES view and save the result in a UIImage.
+
+
+In Technical Q&A 1714 "Capturing an image using AV Foundation",
+
+http:developer.apple.com/library/ios/#qa/qa2010/qa1714.html
+
+Apple pretty clearly shows how to programmatically take a screenshot of an app that contains both UIKit and Camera elements.
+
+This demo application demonstrates how to use these solutions in combination to accomplish screen capture in an augmented reality environment with or without an OpenGL layer and does so using solutions not mentioned in the Technical Q&A's but none-the-less a part of AVFoundation's AVCaptureSession's AVCaptureConnection,
+
+http:developer.apple.com/library/ios/documentation/AVFoundation/Reference/AVCaptureConnection_Class/Reference/Reference.html
+
+Screenshots by Jim Hillhouse is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+Based on a work at github.com.

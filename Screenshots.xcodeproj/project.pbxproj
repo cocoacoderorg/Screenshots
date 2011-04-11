@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E62CD20313395950009CE8EA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E62CD20213395950009CE8EA /* UIKit.framework */; };
+		E62CD20513395950009CE8EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E62CD20413395950009CE8EA /* Foundation.framework */; };
+		E62CD20713395950009CE8EA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E62CD20613395950009CE8EA /* CoreGraphics.framework */; };
+		E62CD20D13395950009CE8EA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E62CD20B13395950009CE8EA /* InfoPlist.strings */; };
+		E62CD21013395950009CE8EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CD20F13395950009CE8EA /* main.m */; };
+		E62CD21313395950009CE8EA /* ScreenshotsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CD21213395950009CE8EA /* ScreenshotsAppDelegate.m */; };
+		E62CD21613395950009CE8EA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62CD21413395950009CE8EA /* MainWindow.xib */; };
+		E62CD21913395950009CE8EA /* ScreenshotsRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E62CD21813395950009CE8EA /* ScreenshotsRootViewController.m */; };
+		E62CD21C13395950009CE8EA /* ScreenshotsRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E62CD21A13395950009CE8EA /* ScreenshotsRootViewController.xib */; };
+		E66738D8133C636F00EC1B19 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E66738D7133C636F00EC1B19 /* Default@2x.png */; };
+		E66738DB133C637900EC1B19 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E66738DA133C637900EC1B19 /* Default.png */; };
+		E66738DD133C63AB00EC1B19 /* Screenshots_Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E66738DC133C63AB00EC1B19 /* Screenshots_Icon@2x.png */; };
+		E66738DF133C63B800EC1B19 /* Screenshots_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E66738DE133C63B800EC1B19 /* Screenshots_Icon.png */; };
+		E66738E7133C795200EC1B19 /* CombinedScreenshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66738E6133C795200EC1B19 /* CombinedScreenshotViewController.m */; };
+		E66738E9133C798200EC1B19 /* CombinedScreenshot.xib in Resources */ = {isa = PBXBuildFile; fileRef = E66738E8133C798200EC1B19 /* CombinedScreenshot.xib */; };
+		E692411913395BA6000BE61D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E692411313395BA6000BE61D /* AVFoundation.framework */; };
+		E692411A13395BA6000BE61D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E692411413395BA6000BE61D /* CoreMedia.framework */; };
+		E692411B13395BA6000BE61D /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E692411513395BA6000BE61D /* CoreVideo.framework */; };
+		E692411C13395BA6000BE61D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E692411613395BA6000BE61D /* MediaPlayer.framework */; };
+		E692411D13395BA6000BE61D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E692411713395BA6000BE61D /* OpenGLES.framework */; };
+		E692411E13395BA6000BE61D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E692411813395BA6000BE61D /* QuartzCore.framework */; };
+		E692412113395CB4000BE61D /* UIKitScreenshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E692412013395CB4000BE61D /* UIKitScreenshotViewController.m */; };
+		E692412F133973DE000BE61D /* UIKitScreenshot.xib in Resources */ = {isa = PBXBuildFile; fileRef = E692412E133973DE000BE61D /* UIKitScreenshot.xib */; };
+		E69241321339D370000BE61D /* ScreenshotsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E69241311339D370000BE61D /* ScreenshotsTableViewCell.xib */; };
+		E6924144133BB915000BE61D /* EAGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = E6924141133BB915000BE61D /* EAGLView.m */; };
+		E6924147133BB930000BE61D /* OpenGLESScreenshot.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6924146133BB930000BE61D /* OpenGLESScreenshot.xib */; };
+		E692414A133BB9D8000BE61D /* OpenGLESScreenshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6924149133BB9D8000BE61D /* OpenGLESScreenshotViewController.m */; };
+		E692414F133BDC81000BE61D /* Aurora.png in Resources */ = {isa = PBXBuildFile; fileRef = E692414B133BDC81000BE61D /* Aurora.png */; };
+		E6924150133BDC81000BE61D /* Aurora@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E692414C133BDC81000BE61D /* Aurora@2x.png */; };
+		E6924151133BDC81000BE61D /* iPhone4.png in Resources */ = {isa = PBXBuildFile; fileRef = E692414D133BDC81000BE61D /* iPhone4.png */; };
+		E6924152133BDC81000BE61D /* iPhone4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E692414E133BDC81000BE61D /* iPhone4@2x.png */; };
+		E6924154133BE7EE000BE61D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6924153133BE7EE000BE61D /* AssetsLibrary.framework */; };
+		E6924158133BF1C2000BE61D /* CameraScreenshot.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6924157133BF1C2000BE61D /* CameraScreenshot.xib */; };
+		E692415B133BF1E5000BE61D /* AVFoundationScreenshotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E692415A133BF1E5000BE61D /* AVFoundationScreenshotViewController.m */; };
+		E6CA98051343ABB700CCADF9 /* ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = E6CA98041343ABB700CCADF9 /* ReadMe */; };
+		E6F7F4BA1341412400CDD844 /* ScreenshotWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6F7F4B81341412400CDD844 /* ScreenshotWebViewController.m */; };
+		E6F7F4BB1341412400CDD844 /* ScreenshotWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6F7F4B91341412400CDD844 /* ScreenshotWebView.xib */; };
+		E6F7F4CC1342F2F700CDD844 /* Screenshots_ReadMe in Resources */ = {isa = PBXBuildFile; fileRef = E6F7F4CB1342F2F700CDD844 /* Screenshots_ReadMe */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E62CD1FE13395950009CE8EA /* Screenshots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Screenshots.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E62CD20213395950009CE8EA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E62CD20413395950009CE8EA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E62CD20613395950009CE8EA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E62CD20A13395950009CE8EA /* Screenshots-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Screenshots-Info.plist"; sourceTree = "<group>"; };
+		E62CD20C13395950009CE8EA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E62CD20E13395950009CE8EA /* Screenshots-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Screenshots-Prefix.pch"; sourceTree = "<group>"; };
+		E62CD20F13395950009CE8EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E62CD21113395950009CE8EA /* ScreenshotsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenshotsAppDelegate.h; sourceTree = "<group>"; };
+		E62CD21213395950009CE8EA /* ScreenshotsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenshotsAppDelegate.m; sourceTree = "<group>"; };
+		E62CD21513395950009CE8EA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		E62CD21713395950009CE8EA /* ScreenshotsRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenshotsRootViewController.h; sourceTree = "<group>"; };
+		E62CD21813395950009CE8EA /* ScreenshotsRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenshotsRootViewController.m; sourceTree = "<group>"; };
+		E62CD21B13395950009CE8EA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ScreenshotsRootViewController.xib; sourceTree = "<group>"; };
+		E66738D7133C636F00EC1B19 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		E66738DA133C637900EC1B19 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		E66738DC133C63AB00EC1B19 /* Screenshots_Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshots_Icon@2x.png"; sourceTree = SOURCE_ROOT; };
+		E66738DE133C63B800EC1B19 /* Screenshots_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Screenshots_Icon.png; sourceTree = SOURCE_ROOT; };
+		E66738E5133C795200EC1B19 /* CombinedScreenshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CombinedScreenshotViewController.h; sourceTree = "<group>"; };
+		E66738E6133C795200EC1B19 /* CombinedScreenshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CombinedScreenshotViewController.m; sourceTree = "<group>"; };
+		E66738E8133C798200EC1B19 /* CombinedScreenshot.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CombinedScreenshot.xib; sourceTree = "<group>"; };
+		E692411313395BA6000BE61D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E692411413395BA6000BE61D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E692411513395BA6000BE61D /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		E692411613395BA6000BE61D /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		E692411713395BA6000BE61D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		E692411813395BA6000BE61D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E692411F13395CB4000BE61D /* UIKitScreenshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIKitScreenshotViewController.h; sourceTree = "<group>"; };
+		E692412013395CB4000BE61D /* UIKitScreenshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIKitScreenshotViewController.m; sourceTree = "<group>"; };
+		E692412E133973DE000BE61D /* UIKitScreenshot.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIKitScreenshot.xib; sourceTree = "<group>"; };
+		E69241311339D370000BE61D /* ScreenshotsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreenshotsTableViewCell.xib; sourceTree = "<group>"; };
+		E6924140133BB915000BE61D /* EAGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAGLView.h; sourceTree = "<group>"; };
+		E6924141133BB915000BE61D /* EAGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAGLView.m; sourceTree = "<group>"; };
+		E6924146133BB930000BE61D /* OpenGLESScreenshot.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenGLESScreenshot.xib; sourceTree = "<group>"; };
+		E6924148133BB9D8000BE61D /* OpenGLESScreenshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLESScreenshotViewController.h; sourceTree = "<group>"; };
+		E6924149133BB9D8000BE61D /* OpenGLESScreenshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenGLESScreenshotViewController.m; sourceTree = "<group>"; };
+		E692414B133BDC81000BE61D /* Aurora.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Aurora.png; sourceTree = "<group>"; };
+		E692414C133BDC81000BE61D /* Aurora@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Aurora@2x.png"; sourceTree = "<group>"; };
+		E692414D133BDC81000BE61D /* iPhone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhone4.png; sourceTree = "<group>"; };
+		E692414E133BDC81000BE61D /* iPhone4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone4@2x.png"; sourceTree = "<group>"; };
+		E6924153133BE7EE000BE61D /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		E6924157133BF1C2000BE61D /* CameraScreenshot.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraScreenshot.xib; sourceTree = "<group>"; };
+		E6924159133BF1E5000BE61D /* AVFoundationScreenshotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVFoundationScreenshotViewController.h; sourceTree = "<group>"; };
+		E692415A133BF1E5000BE61D /* AVFoundationScreenshotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVFoundationScreenshotViewController.m; sourceTree = "<group>"; };
+		E6CA98041343ABB700CCADF9 /* ReadMe */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe; sourceTree = "<group>"; };
+		E6F7F4B71341412400CDD844 /* ScreenshotWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenshotWebViewController.h; sourceTree = "<group>"; };
+		E6F7F4B81341412400CDD844 /* ScreenshotWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenshotWebViewController.m; sourceTree = "<group>"; };
+		E6F7F4B91341412400CDD844 /* ScreenshotWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScreenshotWebView.xib; sourceTree = "<group>"; };
+		E6F7F4CB1342F2F700CDD844 /* Screenshots_ReadMe */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Screenshots_ReadMe; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E62CD1FB13395950009CE8EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6924154133BE7EE000BE61D /* AssetsLibrary.framework in Frameworks */,
+				E692411913395BA6000BE61D /* AVFoundation.framework in Frameworks */,
+				E692411A13395BA6000BE61D /* CoreMedia.framework in Frameworks */,
+				E692411B13395BA6000BE61D /* CoreVideo.framework in Frameworks */,
+				E692411C13395BA6000BE61D /* MediaPlayer.framework in Frameworks */,
+				E692411D13395BA6000BE61D /* OpenGLES.framework in Frameworks */,
+				E692411E13395BA6000BE61D /* QuartzCore.framework in Frameworks */,
+				E62CD20313395950009CE8EA /* UIKit.framework in Frameworks */,
+				E62CD20513395950009CE8EA /* Foundation.framework in Frameworks */,
+				E62CD20713395950009CE8EA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E62CD1F313395950009CE8EA = {
+			isa = PBXGroup;
+			children = (
+				E62CD20813395950009CE8EA /* Screenshots */,
+				E62CD20113395950009CE8EA /* Frameworks */,
+				E62CD1FF13395950009CE8EA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E62CD1FF13395950009CE8EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E62CD1FE13395950009CE8EA /* Screenshots.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E62CD20113395950009CE8EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E62CD20213395950009CE8EA /* UIKit.framework */,
+				E6924153133BE7EE000BE61D /* AssetsLibrary.framework */,
+				E62CD20413395950009CE8EA /* Foundation.framework */,
+				E62CD20613395950009CE8EA /* CoreGraphics.framework */,
+				E692411313395BA6000BE61D /* AVFoundation.framework */,
+				E692411413395BA6000BE61D /* CoreMedia.framework */,
+				E692411513395BA6000BE61D /* CoreVideo.framework */,
+				E692411613395BA6000BE61D /* MediaPlayer.framework */,
+				E692411713395BA6000BE61D /* OpenGLES.framework */,
+				E692411813395BA6000BE61D /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E62CD20813395950009CE8EA /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				E6CA98041343ABB700CCADF9 /* ReadMe */,
+				E6F7F4CB1342F2F700CDD844 /* Screenshots_ReadMe */,
+				E62CD21113395950009CE8EA /* ScreenshotsAppDelegate.h */,
+				E62CD21213395950009CE8EA /* ScreenshotsAppDelegate.m */,
+				E62CD21713395950009CE8EA /* ScreenshotsRootViewController.h */,
+				E62CD21813395950009CE8EA /* ScreenshotsRootViewController.m */,
+				E69241301339CB0B000BE61D /* Screenshot View Controllers */,
+				E6924109133959AE000BE61D /* Xib's */,
+				E692413F1339DFD9000BE61D /* Graphics */,
+				E62CD20913395950009CE8EA /* Supporting Files */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		E62CD20913395950009CE8EA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E62CD20A13395950009CE8EA /* Screenshots-Info.plist */,
+				E62CD20B13395950009CE8EA /* InfoPlist.strings */,
+				E62CD20E13395950009CE8EA /* Screenshots-Prefix.pch */,
+				E62CD20F13395950009CE8EA /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E66738E4133C78DB00EC1B19 /* AVFoundation Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				E6924159133BF1E5000BE61D /* AVFoundationScreenshotViewController.h */,
+				E692415A133BF1E5000BE61D /* AVFoundationScreenshotViewController.m */,
+			);
+			name = "AVFoundation Screenshot";
+			sourceTree = "<group>";
+		};
+		E66738EA133C93B600EC1B19 /* Combo Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				E66738E5133C795200EC1B19 /* CombinedScreenshotViewController.h */,
+				E66738E6133C795200EC1B19 /* CombinedScreenshotViewController.m */,
+			);
+			name = "Combo Screenshot";
+			sourceTree = "<group>";
+		};
+		E6924109133959AE000BE61D /* Xib's */ = {
+			isa = PBXGroup;
+			children = (
+				E62CD21413395950009CE8EA /* MainWindow.xib */,
+				E62CD21A13395950009CE8EA /* ScreenshotsRootViewController.xib */,
+				E692412E133973DE000BE61D /* UIKitScreenshot.xib */,
+				E6924146133BB930000BE61D /* OpenGLESScreenshot.xib */,
+				E6924157133BF1C2000BE61D /* CameraScreenshot.xib */,
+				E66738E8133C798200EC1B19 /* CombinedScreenshot.xib */,
+				E69241311339D370000BE61D /* ScreenshotsTableViewCell.xib */,
+				E6F7F4B91341412400CDD844 /* ScreenshotWebView.xib */,
+			);
+			name = "Xib's";
+			sourceTree = "<group>";
+		};
+		E69241301339CB0B000BE61D /* Screenshot View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E692415D133BF2F2000BE61D /* UIKit Screenshot */,
+				E692415C133BF2DF000BE61D /* OpenGL ES Screenshot */,
+				E66738E4133C78DB00EC1B19 /* AVFoundation Screenshot */,
+				E66738EA133C93B600EC1B19 /* Combo Screenshot */,
+				E6F7F4B71341412400CDD844 /* ScreenshotWebViewController.h */,
+				E6F7F4B81341412400CDD844 /* ScreenshotWebViewController.m */,
+			);
+			name = "Screenshot View Controllers";
+			sourceTree = "<group>";
+		};
+		E692413F1339DFD9000BE61D /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				E692414B133BDC81000BE61D /* Aurora.png */,
+				E692414C133BDC81000BE61D /* Aurora@2x.png */,
+				E692414D133BDC81000BE61D /* iPhone4.png */,
+				E692414E133BDC81000BE61D /* iPhone4@2x.png */,
+				E66738DE133C63B800EC1B19 /* Screenshots_Icon.png */,
+				E66738DC133C63AB00EC1B19 /* Screenshots_Icon@2x.png */,
+				E66738DA133C637900EC1B19 /* Default.png */,
+				E66738D7133C636F00EC1B19 /* Default@2x.png */,
+			);
+			name = Graphics;
+			sourceTree = "<group>";
+		};
+		E692415C133BF2DF000BE61D /* OpenGL ES Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				E6924140133BB915000BE61D /* EAGLView.h */,
+				E6924141133BB915000BE61D /* EAGLView.m */,
+				E6924148133BB9D8000BE61D /* OpenGLESScreenshotViewController.h */,
+				E6924149133BB9D8000BE61D /* OpenGLESScreenshotViewController.m */,
+			);
+			name = "OpenGL ES Screenshot";
+			sourceTree = "<group>";
+		};
+		E692415D133BF2F2000BE61D /* UIKit Screenshot */ = {
+			isa = PBXGroup;
+			children = (
+				E692411F13395CB4000BE61D /* UIKitScreenshotViewController.h */,
+				E692412013395CB4000BE61D /* UIKitScreenshotViewController.m */,
+			);
+			name = "UIKit Screenshot";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E62CD1FD13395950009CE8EA /* Screenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E62CD21F13395950009CE8EA /* Build configuration list for PBXNativeTarget "Screenshots" */;
+			buildPhases = (
+				E62CD1FA13395950009CE8EA /* Sources */,
+				E62CD1FB13395950009CE8EA /* Frameworks */,
+				E62CD1FC13395950009CE8EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Screenshots;
+			productName = Screenshots;
+			productReference = E62CD1FE13395950009CE8EA /* Screenshots.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E62CD1F513395950009CE8EA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = PortableFrontier;
+			};
+			buildConfigurationList = E62CD1F813395950009CE8EA /* Build configuration list for PBXProject "Screenshots" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E62CD1F313395950009CE8EA;
+			productRefGroup = E62CD1FF13395950009CE8EA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E62CD1FD13395950009CE8EA /* Screenshots */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E62CD1FC13395950009CE8EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E62CD20D13395950009CE8EA /* InfoPlist.strings in Resources */,
+				E62CD21613395950009CE8EA /* MainWindow.xib in Resources */,
+				E62CD21C13395950009CE8EA /* ScreenshotsRootViewController.xib in Resources */,
+				E692412F133973DE000BE61D /* UIKitScreenshot.xib in Resources */,
+				E69241321339D370000BE61D /* ScreenshotsTableViewCell.xib in Resources */,
+				E6924147133BB930000BE61D /* OpenGLESScreenshot.xib in Resources */,
+				E692414F133BDC81000BE61D /* Aurora.png in Resources */,
+				E6924150133BDC81000BE61D /* Aurora@2x.png in Resources */,
+				E6924151133BDC81000BE61D /* iPhone4.png in Resources */,
+				E6924152133BDC81000BE61D /* iPhone4@2x.png in Resources */,
+				E6924158133BF1C2000BE61D /* CameraScreenshot.xib in Resources */,
+				E66738D8133C636F00EC1B19 /* Default@2x.png in Resources */,
+				E66738DB133C637900EC1B19 /* Default.png in Resources */,
+				E66738DD133C63AB00EC1B19 /* Screenshots_Icon@2x.png in Resources */,
+				E66738DF133C63B800EC1B19 /* Screenshots_Icon.png in Resources */,
+				E66738E9133C798200EC1B19 /* CombinedScreenshot.xib in Resources */,
+				E6F7F4BB1341412400CDD844 /* ScreenshotWebView.xib in Resources */,
+				E6F7F4CC1342F2F700CDD844 /* Screenshots_ReadMe in Resources */,
+				E6CA98051343ABB700CCADF9 /* ReadMe in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E62CD1FA13395950009CE8EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E62CD21013395950009CE8EA /* main.m in Sources */,
+				E62CD21313395950009CE8EA /* ScreenshotsAppDelegate.m in Sources */,
+				E62CD21913395950009CE8EA /* ScreenshotsRootViewController.m in Sources */,
+				E692412113395CB4000BE61D /* UIKitScreenshotViewController.m in Sources */,
+				E6924144133BB915000BE61D /* EAGLView.m in Sources */,
+				E692414A133BB9D8000BE61D /* OpenGLESScreenshotViewController.m in Sources */,
+				E692415B133BF1E5000BE61D /* AVFoundationScreenshotViewController.m in Sources */,
+				E66738E7133C795200EC1B19 /* CombinedScreenshotViewController.m in Sources */,
+				E6F7F4BA1341412400CDD844 /* ScreenshotWebViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E62CD20B13395950009CE8EA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E62CD20C13395950009CE8EA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E62CD21413395950009CE8EA /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E62CD21513395950009CE8EA /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		E62CD21A13395950009CE8EA /* ScreenshotsRootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E62CD21B13395950009CE8EA /* en */,
+			);
+			name = ScreenshotsRootViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E62CD21D13395950009CE8EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E62CD21E13395950009CE8EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		E62CD22013395950009CE8EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Screenshots/Screenshots-Prefix.pch";
+				INFOPLIST_FILE = "Screenshots/Screenshots-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E62CD22113395950009CE8EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Screenshots/Screenshots-Prefix.pch";
+				INFOPLIST_FILE = "Screenshots/Screenshots-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E62CD1F813395950009CE8EA /* Build configuration list for PBXProject "Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E62CD21D13395950009CE8EA /* Debug */,
+				E62CD21E13395950009CE8EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E62CD21F13395950009CE8EA /* Build configuration list for PBXNativeTarget "Screenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E62CD22013395950009CE8EA /* Debug */,
+				E62CD22113395950009CE8EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E62CD1F513395950009CE8EA /* Project object */;
+}
