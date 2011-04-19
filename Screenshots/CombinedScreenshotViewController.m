@@ -831,7 +831,7 @@ enum
              //
              UIImage *screenshot                = UIGraphicsGetImageFromCurrentImageContext();
              
-             CGSize finalImgSize                = CGSizeMake(screenshot.size.width, screenshot.size.height);
+//             CGSize finalImgSize                = CGSizeMake(screenshot.size.width, screenshot.size.height);
              
              self.screenshotImage               = screenshot;
              

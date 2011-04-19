@@ -8,6 +8,10 @@
 
 #import "ScreenshotsRootViewController.h"
 
+#import "UIKitScreenshotViewController.h"
+#import "OpenGLESScreenshotViewController.h"
+#import "AVFoundationScreenshotViewController.h"
+#import "CombinedScreenshotViewController.h"
 
 @implementation ScreenshotsRootViewController
 
