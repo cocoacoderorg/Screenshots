@@ -122,6 +122,8 @@ enum
 - (void)setupCaptureSession;
 - (AVCaptureConnection *)connectionWithMediaType:(NSString *)mediaType fromConnections:(NSArray *)connections;
 - (void)captureStillImage;
+- (void)autofocusNotSupported;
+- (void)flashNotSupported;
 - (void)captureStillImageFailedWithError:(NSError *)error;
 - (void)cannotWriteToAssetLibrary;
 
@@ -167,12 +169,13 @@ enum
 @synthesize screenshotWebView;
 
 
+
 - (void)dealloc
 {
     if (program) 
     {
         glDeleteProgram(program);
-        program                     = 0;
+        program = 0;
     }
     
     // Tear down context.
@@ -242,6 +245,7 @@ enum
 */
 
 
+
 #pragma mark -
 #pragma mark UIView Controller Methods
 
@@ -249,16 +253,17 @@ enum
 {
 	[super viewDidLoad];
     
+    
     //
     // OpenGL ES code originally in -awakeFromNib
     //
     //    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    EAGLContext *aContext                        = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
     
-    //    if (!aContext) 
-    //    {
-    //        aContext                                = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
-    //    }
+    //if (!aContext) 
+    //{
+    //  aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    //}
     
     if (!aContext)
     {
@@ -269,29 +274,30 @@ enum
         NSLog(@"Failed to set ES context current");
     }
     
-	self.eaglContext                             = aContext;
+	self.eaglContext = aContext;
 	[aContext release];
 	
     [self.eaglView setContext:self.eaglContext];
     [self.eaglView setFramebuffer];
+    
     
     //    if ([eaglContext API] == kEAGLRenderingAPIOpenGLES2)
     //    {
     //        [self loadShaders];
     //    }
     
-    animating                                   = FALSE;
-    animationFrameInterval                      = 1;
-    self.displayLink                            = nil;
+    animating = FALSE;
+    animationFrameInterval = 1;
+    self.displayLink = nil;
     
-    self.backgroundImageView.image              = [UIImage imageNamed:@"Aurora"];
+    self.backgroundImageView.image = [UIImage imageNamed:@"Aurora"];
     
-	self.scanning								= NO;
-    self.showMenuBar                            = NO;
+	self.scanning = NO;
+    self.showMenuBar = NO;
 	
     
-    self.cameraButton.selected					= NO;
-	self.scanButton.selected					= NO;
+    self.cameraButton.selected = NO;
+	self.scanButton.selected = NO;
 	
 	
     //
@@ -346,7 +352,10 @@ enum
         program = 0;
     }
     
+    
+    //
     // Tear down context.
+    //
     if ([EAGLContext currentContext] == eaglContext)
     {
         [EAGLContext setCurrentContext:nil];
@@ -372,44 +381,75 @@ enum
 
 - (UIImage*)screenshot 
 {
+    //
     // Create a graphics context with the target size
     // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
-    // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
-    CGSize imageSize                    = [[UIScreen mainScreen] bounds].size;
+    // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext.
+    //
+    CGSize imageSize = [[UIScreen mainScreen] bounds].size;
     if (NULL != UIGraphicsBeginImageContextWithOptions)
+    {
         UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    }
     else
+    {
         UIGraphicsBeginImageContext(imageSize);
+	}
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
 	
-    CGContextRef context                = UIGraphicsGetCurrentContext();
-	
-    // Iterate over every window from back to front
+    
+    //
+    // Iterate over every window from back to front.
+    //
     for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
     {
         if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
         {
+            //
             // -renderInContext: renders in the coordinate space of the layer,
-            // so we must first apply the layer's geometry to the graphics context
+            // so we must first apply the layer's geometry to the graphics context.
+            //
             CGContextSaveGState(context);
-            // Center the context around the window's anchor point
+            
+            
+            //
+            // Center the context around the window's anchor point.
+            //
             CGContextTranslateCTM(context, [window center].x, [window center].y);
-            // Apply the window's transform about the anchor point
+            
+            //
+            // Apply the window's transform about the anchor point.
+            //
             CGContextConcatCTM(context, [window transform]);
-            // Offset by the portion of the bounds left of and above the anchor point
+            
+            
+            //
+            // Offset by the portion of the bounds left of and above the anchor point.
+            //
             CGContextTranslateCTM(context,
                                   -[window bounds].size.width * [[window layer] anchorPoint].x,
                                   -[window bounds].size.height * [[window layer] anchorPoint].y);
 			
-            // Render the layer hierarchy to the current context
+            
+            //
+            // Render the layer hierarchy to the current context.
+            //
             [[window layer] renderInContext:context];
 			
-            // Restore the context
+            
+            //
+            // Restore the context.
+            //
             CGContextRestoreGState(context);
         }
     }
 	
-    // Retrieve the screenshot image
-    UIImage *image                      = UIGraphicsGetImageFromCurrentImageContext();
+    
+    //
+    // Retrieve the screenshot image.
+    //
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
 	
     UIGraphicsEndImageContext();
 	
@@ -495,44 +535,57 @@ enum
 
 - (void)cameraOn
 {
-	self.cameraButton.selected					= YES;
+    //
+    // The camera has been selected.
+    //
+	self.cameraButton.selected = YES;
 	
-	CGPoint newCameraButtonCenter				= self.cameraButton.center;
-	newCameraButtonCenter.x						= 94.0;
-	
-	CGPoint	newScanButtonCenter					= self.scanButton.center;
-	newScanButtonCenter.x						= 226.0;
     
-	//
-	// Translate the cameraButton and scanButton using view animation
+    //
+    // Set the camera and scan button frame centers to the new desired centers.
+    //
+	CGPoint newCameraButtonCenter = self.cameraButton.center;
+	newCameraButtonCenter.x = 94.0;
+	
+	CGPoint	newScanButtonCenter = self.scanButton.center;
+	newScanButtonCenter.x = 226.0;
+    
+    
+    //
+	// Translate the cameraButton and scanButton using view animation with a completion block.
 	//
 	[UIView animateWithDuration:0.75 animations:^{
-		self.cameraButton.center				= newCameraButtonCenter;
-		self.scanButton.center					= newScanButtonCenter;
+		self.cameraButton.center = newCameraButtonCenter;
+		self.scanButton.center = newScanButtonCenter;
 		
-		self.scanButton.layer.opacity			= 1.0;
+		self.scanButton.layer.opacity = 1.0;
 	}];
 	
 	[self setupCaptureSession];
     
+    
     //
     // Remove the background image so that the streaming camera video will be visable.
     //
-    self.backgroundImageView.image              = nil;
+    self.backgroundImageView.image = nil;
 	
-	//
+	
+    //
 	// This creates the preview of the camera
 	//
-	self.previewLayer                           = [AVCaptureVideoPreviewLayer layerWithSession:self.capturedSession];
-	
-    self.previewLayer.frame						= self.backgroundImageView.bounds; // Assume you want the preview layer to fill the view.
+	self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.capturedSession];
+    self.previewLayer.frame = self.backgroundImageView.bounds; // Assume you want the preview layer to fill the view.
     
+    
+    //
+    // Set the previewLayer to portrait.
+    //
     if (self.previewLayer.orientationSupported) 
     {
-        self.previewLayer.orientation           = AVCaptureVideoOrientationPortrait;
+        self.previewLayer.orientation = AVCaptureVideoOrientationPortrait;
     }
     
-    self.previewLayer.videoGravity              = AVLayerVideoGravityResizeAspectFill;
+    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
 	[self.backgroundImageView.layer addSublayer:self.previewLayer];				
 }
 
@@ -540,27 +593,36 @@ enum
 
 - (void)cameraOff
 {
-	self.cameraButton.selected					= NO;
+    //
+    // Camera is now off.
+    //
+	self.cameraButton.selected = NO;
 	
-	CGPoint newCameraButtonCenter				= self.cameraButton.center;
-	newCameraButtonCenter.x						= 160.0;
 	
-	CGPoint	newScanButtonCenter					= self.scanButton.center;
-	newScanButtonCenter.x						= 160.0;
+    //
+    // Set the camera and scan button frame centers to the new desired centers.
+    //
+	CGPoint newCameraButtonCenter = self.cameraButton.center;
+	newCameraButtonCenter.x = 160.0;
 	
-	//
-	// Translate the cameraButton and scanButton using view animation
+	CGPoint	newScanButtonCenter = self.scanButton.center;
+	newScanButtonCenter.x = 160.0;
+	
+	
+    //
+	// Translate the cameraButton and scanButton using view animation with a completion block.
 	//
 	[UIView animateWithDuration:0.75 animations:^{
-		self.cameraButton.center				= newCameraButtonCenter;
-		self.scanButton.center					= newScanButtonCenter;
+		self.cameraButton.center = newCameraButtonCenter;
+		self.scanButton.center = newScanButtonCenter;
 		
-		self.scanButton.layer.opacity			= 0.0;
+		self.scanButton.layer.opacity = 0.0;
 		
+        
         //
         // This resets the background to an image since the previewLayer is no longer getting content from the camera.
         //
-		self.backgroundImageView.image          = [UIImage imageNamed:@"Aurora"];
+		self.backgroundImageView.image = [UIImage imageNamed:@"Aurora"];
 	}];
 	
 	
@@ -578,60 +640,75 @@ enum
 	
     NSError *error = nil;
 	
-	//
+	
+    //
     // Create the session
 	//
-    AVCaptureSession *session					= [[AVCaptureSession alloc] init];
+    AVCaptureSession *session = [[AVCaptureSession alloc] init];
 	
-	//
+	
+    //
     // Configure the session to produce lower resolution video frames, if your 
     // processing algorithm can cope. We'll specify medium quality for the
     // chosen device.
 	//
-    session.sessionPreset						= AVCaptureSessionPreset640x480;
+    session.sessionPreset = AVCaptureSessionPreset640x480;
 	
+    
     //
 	// Find a suitable AVCaptureDevice
 	//
-    AVCaptureDevice *device						= [AVCaptureDevice
-												   defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	
-	//
+	
+    //
 	// Support auto-focus locked mode
 	//
 	if ([device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) 
 	{
 		NSError *error = nil;
-		if ([device lockForConfiguration:&error]) {
-			device.focusMode					= AVCaptureFocusModeAutoFocus;
+		if ([device lockForConfiguration:&error]) 
+        {
+			device.focusMode    = AVCaptureFocusModeAutoFocus;
 			[device unlockForConfiguration];
 		}
 		else 
 		{
-			// Respond to the failure as appropriate.
+            NSLog(@"Oops!");
+            if ([self respondsToSelector:@selector(autofocusNotSupported)]) 
+            {
+                [self autofocusNotSupported];
+            }
 		}
 	}
 	
-	//
+	
+    //
 	// Support auto flash mode
 	//
 	if ([device isFlashModeSupported:AVCaptureFlashModeAuto]) 
 	{
 		NSError *error = nil;
-		if ([device lockForConfiguration:&error]) {
-			device.flashMode					= AVCaptureFlashModeAuto;
+		if ([device lockForConfiguration:&error]) 
+        {
+			device.flashMode = AVCaptureFlashModeAuto;
 			[device unlockForConfiguration];
 		}
 		else 
 		{
-			// Respond to the failure as appropriate.
+            NSLog(@"Oops!");
+            if ([self respondsToSelector:@selector(flashNotSupported)]) 
+            {
+                [self flashNotSupported];
+            }
 		}
 	}	
 	
-	//
+	
+    //
     // Create a device input with the device and add it to the session.
 	//
-    AVCaptureDeviceInput *input					= [AVCaptureDeviceInput deviceInputWithDevice:device 
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device 
 																			error:&error];
     if (!input) 
 	{
@@ -639,7 +716,8 @@ enum
     }
     [session addInput:input];
 	
-	//
+	
+    //
     // Create a AVCaputreStillImageOutput instance and add it to the session
 	//
 	AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
@@ -649,19 +727,21 @@ enum
 	
 	[session addOutput:stillImageOutput];
 	
-	//
+	
+    //
 	// This is what actually gets the AVCaptureSession going
 	//
     [session startRunning];
 	
-	//
+	
+    //
     // Assign session we've created here to our AVCaptureSession ivar.
 	//
 	// KEY POINT: With this AVCaptureSession property, you can start/stop scanning to your hearts content, or 
 	// until the code you are trying to read has read it.
 	//
-	self.capturedStillImageOutput				= stillImageOutput;
-	self.capturedSession						= session;
+	self.capturedStillImageOutput = stillImageOutput;
+	self.capturedSession = session;
 }
 
 
@@ -670,10 +750,11 @@ enum
 {
 //	NSLog(@"Scanning");
 	
-	self.scanning									= YES;
-	self.scanButton.selected						= YES;
+	self.scanning = YES;
+	self.scanButton.selected = YES;
     
     [UIView animateWithDuration:0.1 animations:^{
+        
         
         //
         // Trigger the OpenGL screenshot and scream-out how much you love blocks!
@@ -695,11 +776,11 @@ enum
 {
     if (self.showMenuBar) 
     {
-        self.showMenuBar                            = NO;
+        self.showMenuBar = NO;
     }
     else
     {
-        self.showMenuBar                            = YES;
+        self.showMenuBar = YES;
     }
 }
 
@@ -722,9 +803,9 @@ enum
          //
          if (imageDataSampleBuffer != NULL) 
          {
-             NSData *imageData					= [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
              
-             UIImage *cameraImage               = [[UIImage alloc] initWithData:imageData];
+             UIImage *cameraImage = [[UIImage alloc] initWithData:imageData];
              
    
              //
@@ -733,13 +814,14 @@ enum
              //
              // Create a graphics context with the target size
              //
-             CGSize imageSize                       = [[UIScreen mainScreen] bounds].size;
+             CGSize imageSize = [[UIScreen mainScreen] bounds].size;
              UIGraphicsBeginImageContextWithOptions( imageSize, NO, 0 );
+             
              
              //
              // Set-up the context
              //
-             CGContextRef context                   = UIGraphicsGetCurrentContext();
+             CGContextRef context = UIGraphicsGetCurrentContext();
              
              
              //
@@ -770,9 +852,9 @@ enum
                      //
                      // Adjust UI Items to reflect their size
                      //
-                     CGFloat statusBarUIOffset          = 20.0;
-                     CGFloat navBarUIOffset             = 44.0;
-                     CGFloat offset                     = statusBarUIOffset + navBarUIOffset;
+                     CGFloat statusBarUIOffset = 20.0;
+                     CGFloat navBarUIOffset = 44.0;
+                     CGFloat offset = statusBarUIOffset + navBarUIOffset;
                    
                      [cameraImage drawInRect:CGRectMake( 0.0, offset, imageSize.width, imageSize.height - offset )];
                  }
@@ -796,9 +878,9 @@ enum
              // But do not forget to include the offsets so that the OpenGL ES view is proportionate
              // to its size.
              //
-             CGSize openGLImageSize             = CGSizeMake(openGLScreenshotImage.size.width, openGLScreenshotImage.size.height);
-             CGFloat openGLImageOffsetX         = ( imageSize.width - openGLImageSize.width ) / 2.0;
-             CGFloat openGLImageOffsetY         = ( imageSize.height - openGLImageSize.height ) / 2.0;
+             CGSize openGLImageSize = CGSizeMake(openGLScreenshotImage.size.width, openGLScreenshotImage.size.height);
+             CGFloat openGLImageOffsetX = ( imageSize.width - openGLImageSize.width ) / 2.0;
+             CGFloat openGLImageOffsetY = ( imageSize.height - openGLImageSize.height ) / 2.0;
 
              UIGraphicsPushContext(context);
              {
@@ -829,34 +911,28 @@ enum
              //
              // Retrieve the screenshot image containing both the camera content and the overlay view
              //
-             UIImage *screenshot                = UIGraphicsGetImageFromCurrentImageContext();
-             
-//             CGSize finalImgSize                = CGSizeMake(screenshot.size.width, screenshot.size.height);
-             
-             self.screenshotImage               = screenshot;
-             
-             UIGraphicsEndImageContext();
-             
-             UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil);
+             UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+//             CGSize finalImgSize = CGSizeMake(screenshot.size.width, screenshot.size.height);
+             self.screenshotImage = screenshot;
              
              
              //
-             // Comment-out this call if you're not using it for the demo.
+             // We're done with the image context, so close it out.
              //
-             [self performSelector:@selector(displayScreenshotImage) withObject:nil afterDelay:0.10];
-
              UIGraphicsEndImageContext();
              
              
              //
-             // This is one way to get images into the Photos Library.
+             // This is a quickie way to write images to the photo album. I'm keeping this code here for those who might
+             // want to use this instead of the better method below
              //
              //UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil);
+             
              
              //
              // Now write the final screenshot output to the users images
              //
-             ALAssetsLibrary *library           = [[ALAssetsLibrary alloc] init];
+             ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
              
              [library writeImageToSavedPhotosAlbum:[screenshot CGImage]
                                        orientation:ALAssetOrientationUp
@@ -885,11 +961,12 @@ enum
          }
      }];
 	
-	// 
+	
+    // 
 	// Clean-up a bit here
 	//
-	self.scanning								= NO;
-	self.scanButton.selected					= NO;
+	self.scanning = NO;
+	self.scanButton.selected = NO;
 }
 
 
@@ -915,13 +992,39 @@ enum
 #pragma mark -
 #pragma mark Error Handling Methods
 
+- (void) autofocusNotSupported
+{
+    UIAlertView *alertView  = [[UIAlertView alloc] initWithTitle:@"Autofocus Not Supported On This Device"
+                                                         message:@"Autofocus is not supported on your device. However, you can still use the camera."
+                                                        delegate:nil
+                                               cancelButtonTitle:@"Okay"
+                                               otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];        
+}
+
+
+
+- (void) flashNotSupported
+{
+    UIAlertView *alertView  = [[UIAlertView alloc] initWithTitle:@"No Flash Available On This Device"
+                                                         message:@"Your device does not have a camera flash. However, you can still use the camera."
+                                                        delegate:nil
+                                               cancelButtonTitle:@"Okay"
+                                               otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];        
+}
+
+
+
 - (void) captureStillImageFailedWithError:(NSError *)error
 {
-    UIAlertView *alertView						= [[UIAlertView alloc] initWithTitle:@"Still Image Capture Failure"
-															 message:[error localizedDescription]
-															delegate:nil
-												   cancelButtonTitle:@"Okay"
-												   otherButtonTitles:nil];
+    UIAlertView *alertView  = [[UIAlertView alloc] initWithTitle:@"Still Image Capture Failure"
+                                                         message:[error localizedDescription]
+                                                        delegate:nil
+                                               cancelButtonTitle:@"Okay"
+                                               otherButtonTitles:nil];
     [alertView show];
     [alertView release];
 }
@@ -930,11 +1033,11 @@ enum
 
 - (void) cannotWriteToAssetLibrary
 {
-    UIAlertView *alertView						= [[UIAlertView alloc] initWithTitle:@"Incompatible with Asset Library"
-															 message:@"The captured file cannot be written to the asset library. It is likely an audio-only file."
-															delegate:nil
-												   cancelButtonTitle:@"Okay"
-												   otherButtonTitles:nil];
+    UIAlertView *alertView  = [[UIAlertView alloc] initWithTitle:@"Incompatible with Asset Library"
+                                                         message:@"The captured file cannot be written to the asset library. It is likely an audio-only file."
+                                                        delegate:nil
+                                               cancelButtonTitle:@"Okay"
+                                               otherButtonTitles:nil];
     [alertView show];
     [alertView release];        
 }
@@ -968,7 +1071,7 @@ enum
     
     self.screenshotWebView.delegate = self;
     
-    self.screenshotWebView.documentationURL     = [NSURL URLWithString:@"http://developer.apple.com/library/ios/#qa/qa2010/qa1714.html"];
+    self.screenshotWebView.documentationURL = [NSURL URLWithString:@"http://developer.apple.com/library/ios/#qa/qa2010/qa1714.html"];
     
 	self.screenshotWebView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:self.screenshotWebView animated:YES];
@@ -1005,7 +1108,7 @@ enum
 	 */
     if (frameInterval >= 1) 
     {
-        animationFrameInterval = frameInterval;
+        animationFrameInterval  = frameInterval;
         
         if (animating) 
         {
@@ -1023,12 +1126,12 @@ enum
     if (!animating) 
     {
 //        NSLog(@"animating was NO, now is YES");
-        CADisplayLink *aDisplayLink                 = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame)];
+        CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame)];
         [aDisplayLink setFrameInterval:animationFrameInterval];
         [aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        self.displayLink                            = aDisplayLink;
+        self.displayLink = aDisplayLink;
         
-        animating                                   = TRUE;
+        animating = TRUE;
     }
 }
 
@@ -1040,7 +1143,7 @@ enum
     if (animating) 
     {
         [self.displayLink invalidate];
-        self.displayLink                            = nil;
+        self.displayLink    = nil;
         animating = FALSE;
     }
 }
@@ -1107,7 +1210,7 @@ enum
         
         glTranslatef(0.0f, (GLfloat)(sinf(transY)/2.0f), 0.0f);
         
-        transY                                          += 0.075f;
+        transY += 0.075f;
         
         glVertexPointer(2, GL_FLOAT, 0, squareVertices);
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -1116,6 +1219,7 @@ enum
     }
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
     
     //////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                              //

@@ -14,9 +14,9 @@
 
 @interface ScreenshotWebViewController : UIViewController <UIWebViewDelegate>
 {
-    id <ScreenshotWebViewControllerDelegate>        delegate;
-    UIWebView                                       *documentationWebView;
-    NSURL                                           *documentationURL;
+    id <ScreenshotWebViewControllerDelegate>    delegate;
+    UIWebView                                   *documentationWebView;
+    NSURL                                       *documentationURL;
 }
 
 @property (nonatomic, assign)       id              <ScreenshotWebViewControllerDelegate>   delegate;

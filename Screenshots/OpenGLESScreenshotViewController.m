@@ -147,7 +147,7 @@ enum
     if (program) 
     {
         glDeleteProgram(program);
-        program                             = 0;
+        program = 0;
     }
     
     // Tear down context.
@@ -222,15 +222,16 @@ enum
 {
 	[super viewDidLoad];
     
+    
     //
     // OpenGL ES code originally in -awakeFromNib
     //
     //    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    EAGLContext *aContext                        = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    EAGLContext *aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
     
     //    if (!aContext) 
     //    {
-    //        aContext                            = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
+    //        aContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
     //    }
     
     if (!aContext)
@@ -242,7 +243,7 @@ enum
         NSLog(@"Failed to set ES context current");
     }
     
-	self.eaglContext                             = aContext;
+	self.eaglContext = aContext;
 	[aContext release];
 	
     [self.eaglView setContext:self.eaglContext];
@@ -253,12 +254,12 @@ enum
     //        [self loadShaders];
     //    }
     
-    animating                                   = FALSE;
-    animationFrameInterval                      = 1;
-    self.displayLink                            = nil;
+    animating = FALSE;
+    animationFrameInterval = 1;
+    self.displayLink = nil;
 
-    self.overlayImageView.image                 = [UIImage imageNamed:@"iPhone4"];
-    self.backgroundImageView.image              = [UIImage imageNamed:@"Aurora"];
+    self.overlayImageView.image = [UIImage imageNamed:@"iPhone4"];
+    self.backgroundImageView.image = [UIImage imageNamed:@"Aurora"];
 }
 
 
@@ -297,12 +298,12 @@ enum
         [EAGLContext setCurrentContext:nil];
     }
 	
-    self.eaglContext                                = nil;	
+    self.eaglContext = nil;	
     
-    self.mainView                                   = nil;
-    self.overlayView                                = nil;
-    self.overlayImageView                           = nil;
-    self.backgroundImageView                        = nil;
+    self.mainView = nil;
+    self.overlayView = nil;
+    self.overlayImageView = nil;
+    self.backgroundImageView = nil;
 }
 
 
@@ -359,7 +360,7 @@ enum
     
     self.screenshotWebView.delegate = self;
     
-    self.screenshotWebView.documentationURL     = [NSURL URLWithString:@"http://developer.apple.com/library/ios/#qa/qa2010/qa1704.html"];
+    self.screenshotWebView.documentationURL = [NSURL URLWithString:@"http://developer.apple.com/library/ios/#qa/qa2010/qa1704.html"];
     
 	self.screenshotWebView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:self.screenshotWebView animated:YES];
@@ -412,12 +413,12 @@ enum
     if (!animating) 
     {
 //        NSLog(@"animating was NO, now is YES");
-        CADisplayLink *aDisplayLink                 = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame)];
+        CADisplayLink *aDisplayLink = [[UIScreen mainScreen] displayLinkWithTarget:self selector:@selector(drawFrame)];
         [aDisplayLink setFrameInterval:animationFrameInterval];
         [aDisplayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        self.displayLink                            = aDisplayLink;
+        self.displayLink = aDisplayLink;
         
-        animating                                   = TRUE;
+        animating = TRUE;
     }
 }
 
@@ -427,7 +428,7 @@ enum
     if (animating) 
     {
         [self.displayLink invalidate];
-        self.displayLink                            = nil;
+        self.displayLink = nil;
         animating = FALSE;
     }
 }
@@ -493,7 +494,7 @@ enum
         
         glTranslatef(0.0f, (GLfloat)(sinf(transY)/2.0f), 0.0f);
         
-        transY                                          += 0.075f;
+        transY += 0.075f;
         
         glVertexPointer(2, GL_FLOAT, 0, squareVertices);
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -502,6 +503,7 @@ enum
     }
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
     
     //////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                              //
