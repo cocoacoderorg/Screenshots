@@ -57,25 +57,25 @@
 {
     [super viewDidLoad];
     
-    NSDictionary    *screenshotDictionary1      = [[NSDictionary alloc] initWithObjectsAndKeys:@"UIKit Screenshot", @"Name",
+    NSDictionary    *screenshotDictionary1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"UIKit Screenshot", @"Name",
                                                    @"As documented in Apple's QA1703", @"Summary", nil];
  
-    NSDictionary    *screenshotDictionary2      = [[NSDictionary alloc] initWithObjectsAndKeys:@"OpenGL ES Screenshot", @"Name",
+    NSDictionary    *screenshotDictionary2 = [[NSDictionary alloc] initWithObjectsAndKeys:@"OpenGL ES Screenshot", @"Name",
                                                    @"As documented in Apple's QA1704", @"Summary", nil];
 
-    NSDictionary    *screenshotDictionary3      = [[NSDictionary alloc] initWithObjectsAndKeys:@"AVFoundation Screenshot", @"Name",
+    NSDictionary    *screenshotDictionary3 = [[NSDictionary alloc] initWithObjectsAndKeys:@"AVFoundation Screenshot", @"Name",
                                                    @"As documented in Apple's QA1714", @"Summary", nil];
     
-    NSDictionary    *screenshotDictionary4      = [[NSDictionary alloc] initWithObjectsAndKeys:@"Combined Screenshot", @"Name",
+    NSDictionary    *screenshotDictionary4 = [[NSDictionary alloc] initWithObjectsAndKeys:@"Combined Screenshot", @"Name",
                                                    @"QA 1702, QA 1703, QA 1704 & QA1714", @"Summary", nil];
     
-    NSArray         *anArray                    = [[NSArray alloc] initWithObjects:
-                                                   screenshotDictionary1, 
-                                                   screenshotDictionary2, 
-                                                   screenshotDictionary3, 
-                                                   screenshotDictionary4, nil];
+    NSArray         *anArray = [[NSArray alloc] initWithObjects:
+                                screenshotDictionary1, 
+                                screenshotDictionary2, 
+                                screenshotDictionary3, 
+                                screenshotDictionary4, nil];
     
-    self.viewControllers                        = anArray;
+    self.viewControllers = anArray;
     
     [screenshotDictionary1 release];
     [screenshotDictionary2 release];
@@ -90,16 +90,16 @@
 {
     [super viewDidUnload];
     
-    self.viewControllers                        = nil;
+    self.viewControllers = nil;
     
-    self.uikitScreenshotViewController          = nil;
-    self.opengGLESScreenshotViewController      = nil;
-    self.avfoundationScreenshotViewController   = nil;
-    self.combinedScreenshotViewController       = nil;
+    self.uikitScreenshotViewController = nil;
+    self.opengGLESScreenshotViewController = nil;
+    self.avfoundationScreenshotViewController = nil;
+    self.combinedScreenshotViewController = nil;
     
-    self.screenshotsTableViewCell               = nil;
-    self.screenshotName                         = nil;
-    self.screenshotSummary                      = nil;
+    self.screenshotsTableViewCell = nil;
+    self.screenshotName = nil;
+    self.screenshotSummary = nil;
 }
 
 
@@ -142,7 +142,9 @@
 
 #pragma mark - UITableViewDelegate Methods
 
+//
 // Customize the number of sections in the table view.
+//
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -157,19 +159,21 @@
 
 
 
+//
 // Customize the appearance of table view cells.
+//
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *ScreenshotsCellIdentifier = @"Cell";
     
-    UITableViewCell *cell                   = [tableView dequeueReusableCellWithIdentifier:ScreenshotsCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ScreenshotsCellIdentifier];
     if (cell == nil) 
     {
-        NSArray    *nibArray                = [[NSBundle mainBundle] loadNibNamed:@"ScreenshotsTableViewCell" owner:self options:nil];
+        NSArray    *nibArray = [[NSBundle mainBundle] loadNibNamed:@"ScreenshotsTableViewCell" owner:self options:nil];
         
         if ( [nibArray count] > 0 ) 
         {
-            cell                            = self.screenshotsTableViewCell;
+            cell = self.screenshotsTableViewCell;
         }
         else
         {
@@ -177,12 +181,15 @@
         }
     }
     
-    // Configure the cell.
-    NSUInteger row                          = [indexPath row];
-    NSDictionary *rowData                   = [self.viewControllers objectAtIndex:row];
     
-    self.screenshotName.text                = [rowData objectForKey:@"Name"];
-    self.screenshotSummary.text             = [rowData objectForKey:@"Summary"];
+    //
+    // Using the selected table view row, configure the cell.
+    //
+    NSUInteger row = [indexPath row];
+    NSDictionary *rowData = [self.viewControllers objectAtIndex:row];
+    
+    self.screenshotName.text = [rowData objectForKey:@"Name"];
+    self.screenshotSummary.text = [rowData objectForKey:@"Summary"];
     
     return cell;
 }
@@ -198,7 +205,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger row                          = [indexPath row];
+    NSUInteger row = [indexPath row];
     
     if ( row == 0 ) 
     {

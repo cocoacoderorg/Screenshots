@@ -25,7 +25,6 @@
 
 
 
-
 #import <UIKit/UIKit.h>
 
 #import <OpenGLES/EAGL.h>
@@ -65,7 +64,7 @@
 - (void)setFramebuffer;
 - (BOOL)presentFramebuffer;
 
-// This is the method declaration that takes the OpenGL screenshot and is based on QA1704.//
+// This is the method declaration that takes the OpenGL screenshot and is based on QA1704.
 - (void)openGLViewScreenshot:(UIView*)eaglview;
 
 // This is the method used to trigger OpenGL to take a screenshot.

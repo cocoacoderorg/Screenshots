@@ -161,15 +161,16 @@
 {
 	[super viewDidLoad];
     
-    self.overlayImageView.image                 = [UIImage imageNamed:@"iPhone4"];
-    self.backgroundImageView.image              = [UIImage imageNamed:@"Aurora"];
+    self.overlayImageView.image = [UIImage imageNamed:@"iPhone4"];
+    self.backgroundImageView.image = [UIImage imageNamed:@"Aurora"];
     
     
-	self.scanning								= NO;
-	self.cameraButton.selected					= NO;
-	self.scanButton.selected					= NO;
+	self.scanning = NO;
+	self.cameraButton.selected = NO;
+	self.scanButton.selected = NO;
 	
-	//
+	
+    //
 	// These UIButton calls set up the custom button to change its appearance when selected/not selected.
 	//
 	[self.scanButton setTitle:@"Stop" forState:UIControlStateSelected];
@@ -178,7 +179,8 @@
 	[self.scanButton setTitle:@"Take a Picture!" forState:UIControlStateNormal];
 	[self.scanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];	
 	
-	//
+	
+    //
 	// These UIButton calls set up the custom button to change its appearance when selected/not selected.
 	//
 	[self.cameraButton setTitle:@"Cancel" forState:UIControlStateSelected];
@@ -210,10 +212,10 @@
 {
 	[super viewDidUnload];
     
-    self.mainView                               = nil;
-    self.overlayView                            = nil;
-    self.overlayImageView                       = nil;
-    self.backgroundImageView                    = nil;
+    self.mainView = nil;
+    self.overlayView = nil;
+    self.overlayImageView = nil;
+    self.backgroundImageView = nil;
 }
 
 
@@ -308,44 +310,57 @@
 
 - (void)cameraOn
 {
-	self.cameraButton.selected      = YES;
+    //
+    // The camera has been selected.
+    //
+	self.cameraButton.selected = YES;
 	
-	CGPoint newCameraButtonCenter   = self.cameraButton.center;
-	newCameraButtonCenter.x         = 94.0;
-	
-	CGPoint	newScanButtonCenter     = self.scanButton.center;
-	newScanButtonCenter.x           = 226.0;
     
-	//
-	// Translate the cameraButton and scanButton using view animation
+    //
+    // Set the camera and scan button frame centers to the new desired centers.
+    //
+	CGPoint newCameraButtonCenter = self.cameraButton.center;
+	newCameraButtonCenter.x = 94.0;
+	
+	CGPoint	newScanButtonCenter = self.scanButton.center;
+	newScanButtonCenter.x = 226.0;
+    
+	
+    //
+	// Translate the cameraButton and scanButton using view animation with a completion block.
 	//
 	[UIView animateWithDuration:0.75 animations:^{
-		self.cameraButton.center        = newCameraButtonCenter;
-		self.scanButton.center          = newScanButtonCenter;
+		self.cameraButton.center = newCameraButtonCenter;
+		self.scanButton.center = newScanButtonCenter;
 		
-		self.scanButton.layer.opacity   = 1.0;
+		self.scanButton.layer.opacity = 1.0;
 	}];
 	
 	[self setupCaptureSession];
     
+    
     //
     // Remove the background image so that the streaming camera video will be visable.
     //
-    self.backgroundImageView.image  = nil;
+    self.backgroundImageView.image = nil;
 	
-	//
+	
+    //
 	// This creates the preview of the camera
 	//
-	self.previewLayer               = [AVCaptureVideoPreviewLayer layerWithSession:self.capturedSession];
-	
-    self.previewLayer.frame         = self.backgroundImageView.bounds; // Assume you want the preview layer to fill the view.
+	self.previewLayer = [AVCaptureVideoPreviewLayer layerWithSession:self.capturedSession];
+    self.previewLayer.frame = self.backgroundImageView.bounds; // Assume you want the preview layer to fill the view.
     
+    
+    //
+    // Set the previewLayer to portrait.
+    //
     if (self.previewLayer.orientationSupported) 
     {
-        self.previewLayer.orientation   = AVCaptureVideoOrientationPortrait;
+        self.previewLayer.orientation = AVCaptureVideoOrientationPortrait;
     }
     
-    self.previewLayer.videoGravity  = AVLayerVideoGravityResizeAspectFill;
+    self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
 	[self.backgroundImageView.layer addSublayer:self.previewLayer];				
 }
 
@@ -353,27 +368,36 @@
 
 - (void)cameraOff
 {
+    //
+    // Camera is now off.
+    //
 	self.cameraButton.selected      = NO;
 	
-	CGPoint newCameraButtonCenter   = self.cameraButton.center;
-	newCameraButtonCenter.x         = 160.0;
 	
-	CGPoint	newScanButtonCenter     = self.scanButton.center;
-	newScanButtonCenter.x           = 160.0;
+    //
+    // Set the camera and scan button frame centers to the new desired centers.
+    //
+	CGPoint newCameraButtonCenter = self.cameraButton.center;
+	newCameraButtonCenter.x = 160.0;
 	
-	//
-	// Translate the cameraButton and scanButton using view animation
+	CGPoint	newScanButtonCenter = self.scanButton.center;
+	newScanButtonCenter.x = 160.0;
+	
+	
+    //
+	// Translate the cameraButton and scanButton using view animation with a completion block.
 	//
 	[UIView animateWithDuration:0.75 animations:^{
-		self.cameraButton.center        = newCameraButtonCenter;
-		self.scanButton.center          = newScanButtonCenter;
+		self.cameraButton.center = newCameraButtonCenter;
+		self.scanButton.center = newScanButtonCenter;
 		
-		self.scanButton.layer.opacity   = 0.0;
+		self.scanButton.layer.opacity = 0.0;
 		
+        
         //
         // This resets the background to an image since the previewLayer is no longer getting content from the camera.
         //
-		self.backgroundImageView.image  = [UIImage imageNamed:@"Aurora"];
+		self.backgroundImageView.image = [UIImage imageNamed:@"Aurora"];
 	}];
 	
 	
@@ -388,8 +412,8 @@
 {
 //	NSLog(@"Scanning");
 	
-	self.scanning               = YES;
-	self.scanButton.selected    = YES;
+	self.scanning = YES;
+	self.scanButton.selected = YES;
     
     [UIView animateWithDuration:0.1 animations:^{
         
@@ -412,24 +436,28 @@
 	
     NSError *error = nil;
 	
-	//
+	
+    //
     // Create the session
 	//
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
 	
-	//
+	
+    //
     // Configure the session to produce lower resolution video frames, if your 
     // processing algorithm can cope. We'll specify medium quality for the
     // chosen device.
 	//
     session.sessionPreset = AVCaptureSessionPreset640x480;
 	
+    
     //
 	// Find a suitable AVCaptureDevice
 	//
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	
-	//
+	
+    //
 	// Support auto-focus locked mode
 	//
 	if ([device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) 
@@ -450,7 +478,8 @@
 		}
 	}
 	
-	//
+	
+    //
 	// Support auto flash mode
 	//
 	if ([device isFlashModeSupported:AVCaptureFlashModeAuto]) 
@@ -471,7 +500,8 @@
 		}
 	}	
 	
-	//
+	
+    //
     // Create a device input with the device and add it to the session.
 	//
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device 
@@ -482,7 +512,8 @@
     }
     [session addInput:input];
 	
-	//
+	
+    //
     // Create a AVCaputreStillImageOutput instance and add it to the session
 	//
 	AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
@@ -492,12 +523,14 @@
 	
 	[session addOutput:stillImageOutput];
 	
-	//
+	
+    //
 	// This is what actually gets the AVCaptureSession going
 	//
     [session startRunning];
 	
-	//
+	
+    //
     // Assign session we've created here to our AVCaptureSession ivar.
 	//
 	// KEY POINT: With this AVCaptureSession property, you can start/stop scanning to your hearts content, or 
@@ -529,9 +562,12 @@
          //
          if (imageDataSampleBuffer != NULL) 
          {
-             NSData *imageData					= [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+             //
+             // Grab the image data as a JPEG still image from the AVCaptureStillImageOutput and create a UIImage image with it.
+             //
+             NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+             UIImage *image = [[UIImage alloc] initWithData:imageData];
              
-             UIImage *image						= [[UIImage alloc] initWithData:imageData];
              
              //
              // Now, we're going to using -renderView:inContext to build-up our screenshot.
@@ -542,17 +578,19 @@
              CGSize imageSize = [[UIScreen mainScreen] bounds].size;
              UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
              
-             CGContextRef context				= UIGraphicsGetCurrentContext();
+             CGContextRef context = UIGraphicsGetCurrentContext();
+             
              
              //
              // Draw the image returned by the camera sample buffer into the context. 
              // Draw it into the same sized rectangle as the view that is displayed on the screen.
              //
-             //			CGFloat menubarUIOffset				= 20.0;
-             //			CGFloat	tabbarUIOffset				= 44.0;
+             //			CGFloat menubarUIOffset = 20.0;
+             //			CGFloat	tabbarUIOffset = 44.0;
              UIGraphicsPushContext(context);
              [image drawInRect:CGRectMake(0, 0, imageSize.width, imageSize.height)];
              UIGraphicsPopContext();
+             
              
              
              //
@@ -560,34 +598,36 @@
              //
              [self renderView:self.overlayView inContext:context];
              
+             
              //
              // Retrieve the screenshot image containing both the camera content and the overlay view
              //
-             UIImage *screenshot					= UIGraphicsGetImageFromCurrentImageContext();
+             UIImage *screenshot = UIGraphicsGetImageFromCurrentImageContext();
+             self.screenshotImage = screenshot;
              
-             self.screenshotImage                   = screenshot;
              
+             //
+             // We're done with the image context, so close it out.
+             //
              UIGraphicsEndImageContext();
-             
-             UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil);
              
              
              //
              // Comment-out this call if you're not using it for the demo.
              //
              [self performSelector:@selector(displayScreenshotImage) withObject:nil afterDelay:0.10];
-
-             UIGraphicsEndImageContext();
+             
              
              //
-             // This is one way to get images into the Photos Library.
+             // This is a quickie way to write images to the photo album. I'm keeping this code here for those who might
+             // want to use this instead of the better method below
              //
              //UIImageWriteToSavedPhotosAlbum(screenshot, nil, nil, nil);
+             
              
              //
              // Now write the final screenshot output to the users images
              //
-             
              ALAssetsLibrary *library			= [[ALAssetsLibrary alloc] init];
              
              [library writeImageToSavedPhotosAlbum:[screenshot CGImage]
@@ -617,8 +657,10 @@
          }
      }];
 	
-	// 
-	// Clean-up a bit here
+	
+    // 
+	// Clean-up a bit here to make sure that we're not gathering data for a new image and the state of the 
+    // "scan" button reflects that.
 	//
 	self.scanning = NO;
 	self.scanButton.selected = NO;

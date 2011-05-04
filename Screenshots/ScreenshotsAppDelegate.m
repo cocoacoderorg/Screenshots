@@ -11,9 +11,9 @@
 @implementation ScreenshotsAppDelegate
 
 
-@synthesize window=_window;
+@synthesize window = _window;
 
-@synthesize navigationController=_navigationController;
+@synthesize navigationController = _navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

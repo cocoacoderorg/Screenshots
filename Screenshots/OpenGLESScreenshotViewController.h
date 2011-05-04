@@ -32,10 +32,6 @@
 #import <OpenGLES/ES1/glext.h>
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
-//#import <AVFoundation/AVFoundation.h>
-//#import <CoreGraphics/CoreGraphics.h>
-//#import <CoreVideo/CoreVideo.h>
-//#import <CoreMedia/CoreMedia.h>
 
 #import "EAGLView.h"
 
