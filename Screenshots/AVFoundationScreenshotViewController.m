@@ -90,6 +90,8 @@
 // AVFoundation (Camera) Methods
 - (void)setupCaptureSession;
 - (void)captureStillImage;
+- (void)autofocusNotSupported;
+- (void)flashNotSupported;
 - (void)captureStillImageFailedWithError:(NSError *)error;
 - (void)cannotWriteToAssetLibrary;
 - (void)cameraOn;
@@ -306,22 +308,22 @@
 
 - (void)cameraOn
 {
-	self.cameraButton.selected					= YES;
+	self.cameraButton.selected      = YES;
 	
-	CGPoint newCameraButtonCenter				= self.cameraButton.center;
-	newCameraButtonCenter.x						= 94.0;
+	CGPoint newCameraButtonCenter   = self.cameraButton.center;
+	newCameraButtonCenter.x         = 94.0;
 	
-	CGPoint	newScanButtonCenter					= self.scanButton.center;
-	newScanButtonCenter.x						= 226.0;
+	CGPoint	newScanButtonCenter     = self.scanButton.center;
+	newScanButtonCenter.x           = 226.0;
     
 	//
 	// Translate the cameraButton and scanButton using view animation
 	//
 	[UIView animateWithDuration:0.75 animations:^{
-		self.cameraButton.center				= newCameraButtonCenter;
-		self.scanButton.center					= newScanButtonCenter;
+		self.cameraButton.center        = newCameraButtonCenter;
+		self.scanButton.center          = newScanButtonCenter;
 		
-		self.scanButton.layer.opacity			= 1.0;
+		self.scanButton.layer.opacity   = 1.0;
 	}];
 	
 	[self setupCaptureSession];
@@ -329,21 +331,21 @@
     //
     // Remove the background image so that the streaming camera video will be visable.
     //
-    self.backgroundImageView.image              = nil;
+    self.backgroundImageView.image  = nil;
 	
 	//
 	// This creates the preview of the camera
 	//
-	self.previewLayer                           = [AVCaptureVideoPreviewLayer layerWithSession:self.capturedSession];
+	self.previewLayer               = [AVCaptureVideoPreviewLayer layerWithSession:self.capturedSession];
 	
-    self.previewLayer.frame						= self.backgroundImageView.bounds; // Assume you want the preview layer to fill the view.
+    self.previewLayer.frame         = self.backgroundImageView.bounds; // Assume you want the preview layer to fill the view.
     
     if (self.previewLayer.orientationSupported) 
     {
-        self.previewLayer.orientation           = AVCaptureVideoOrientationPortrait;
+        self.previewLayer.orientation   = AVCaptureVideoOrientationPortrait;
     }
     
-    self.previewLayer.videoGravity              = AVLayerVideoGravityResizeAspectFill;
+    self.previewLayer.videoGravity  = AVLayerVideoGravityResizeAspectFill;
 	[self.backgroundImageView.layer addSublayer:self.previewLayer];				
 }
 
@@ -351,27 +353,27 @@
 
 - (void)cameraOff
 {
-	self.cameraButton.selected					= NO;
+	self.cameraButton.selected      = NO;
 	
-	CGPoint newCameraButtonCenter				= self.cameraButton.center;
-	newCameraButtonCenter.x						= 160.0;
+	CGPoint newCameraButtonCenter   = self.cameraButton.center;
+	newCameraButtonCenter.x         = 160.0;
 	
-	CGPoint	newScanButtonCenter					= self.scanButton.center;
-	newScanButtonCenter.x						= 160.0;
+	CGPoint	newScanButtonCenter     = self.scanButton.center;
+	newScanButtonCenter.x           = 160.0;
 	
 	//
 	// Translate the cameraButton and scanButton using view animation
 	//
 	[UIView animateWithDuration:0.75 animations:^{
-		self.cameraButton.center				= newCameraButtonCenter;
-		self.scanButton.center					= newScanButtonCenter;
+		self.cameraButton.center        = newCameraButtonCenter;
+		self.scanButton.center          = newScanButtonCenter;
 		
-		self.scanButton.layer.opacity			= 0.0;
+		self.scanButton.layer.opacity   = 0.0;
 		
         //
         // This resets the background to an image since the previewLayer is no longer getting content from the camera.
         //
-		self.backgroundImageView.image          = [UIImage imageNamed:@"Aurora"];
+		self.backgroundImageView.image  = [UIImage imageNamed:@"Aurora"];
 	}];
 	
 	
@@ -386,8 +388,8 @@
 {
 //	NSLog(@"Scanning");
 	
-	self.scanning									= YES;
-	self.scanButton.selected						= YES;
+	self.scanning               = YES;
+	self.scanButton.selected    = YES;
     
     [UIView animateWithDuration:0.1 animations:^{
         
@@ -413,20 +415,19 @@
 	//
     // Create the session
 	//
-    AVCaptureSession *session					= [[AVCaptureSession alloc] init];
+    AVCaptureSession *session = [[AVCaptureSession alloc] init];
 	
 	//
     // Configure the session to produce lower resolution video frames, if your 
     // processing algorithm can cope. We'll specify medium quality for the
     // chosen device.
 	//
-    session.sessionPreset						= AVCaptureSessionPreset640x480;
+    session.sessionPreset = AVCaptureSessionPreset640x480;
 	
     //
 	// Find a suitable AVCaptureDevice
 	//
-    AVCaptureDevice *device						= [AVCaptureDevice
-												   defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 	
 	//
 	// Support auto-focus locked mode
@@ -434,13 +435,18 @@
 	if ([device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) 
 	{
 		NSError *error = nil;
-		if ([device lockForConfiguration:&error]) {
-			device.focusMode					= AVCaptureFocusModeAutoFocus;
+		if ([device lockForConfiguration:&error]) 
+        {
+			device.focusMode = AVCaptureFocusModeAutoFocus;
 			[device unlockForConfiguration];
 		}
 		else 
 		{
-			// Respond to the failure as appropriate.
+            NSLog(@"Oops!");
+            if ([self respondsToSelector:@selector(autofocusNotSupported)]) 
+            {
+                [self autofocusNotSupported];
+            }
 		}
 	}
 	
@@ -450,20 +456,25 @@
 	if ([device isFlashModeSupported:AVCaptureFlashModeAuto]) 
 	{
 		NSError *error = nil;
-		if ([device lockForConfiguration:&error]) {
-			device.flashMode					= AVCaptureFlashModeAuto;
+		if ([device lockForConfiguration:&error]) 
+        {
+			device.flashMode = AVCaptureFlashModeAuto;
 			[device unlockForConfiguration];
 		}
 		else 
 		{
-			// Respond to the failure as appropriate.
+            NSLog(@"Oops!");
+            if ([self respondsToSelector:@selector(flashNotSupported)]) 
+            {
+                [self flashNotSupported];
+            }
 		}
 	}	
 	
 	//
     // Create a device input with the device and add it to the session.
 	//
-    AVCaptureDeviceInput *input					= [AVCaptureDeviceInput deviceInputWithDevice:device 
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device 
 																			error:&error];
     if (!input) 
 	{
@@ -492,8 +503,8 @@
 	// KEY POINT: With this AVCaptureSession property, you can start/stop scanning to your hearts content, or 
 	// until the code you are trying to read has read it.
 	//
-	self.capturedStillImageOutput				= stillImageOutput;
-	self.capturedSession						= session;
+	self.capturedStillImageOutput  = stillImageOutput;
+	self.capturedSession  = session;
 }
 
 
@@ -609,8 +620,8 @@
 	// 
 	// Clean-up a bit here
 	//
-	self.scanning								= NO;
-	self.scanButton.selected					= NO;
+	self.scanning = NO;
+	self.scanButton.selected = NO;
 }
 
 
@@ -636,13 +647,39 @@
 #pragma mark -
 #pragma mark Error Handling Methods
 
+- (void) autofocusNotSupported
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Autofocus Not Supported On This Device"
+                                                        message:@"Autofocus is not supported on your device. However, you can still use the camera."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];        
+}
+
+
+
+- (void) flashNotSupported
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"No Flash Available On This Device"
+                                                        message:@"Your device does not have a camera flash. However, you can still use the camera."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
+    [alertView show];
+    [alertView release];        
+}
+
+
+
 - (void) captureStillImageFailedWithError:(NSError *)error
 {
-    UIAlertView *alertView						= [[UIAlertView alloc] initWithTitle:@"Still Image Capture Failure"
-															 message:[error localizedDescription]
-															delegate:nil
-												   cancelButtonTitle:@"Okay"
-												   otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Still Image Capture Failure"
+                                                        message:[error localizedDescription]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
     [alertView show];
     [alertView release];
 }
@@ -651,11 +688,11 @@
 
 - (void) cannotWriteToAssetLibrary
 {
-    UIAlertView *alertView						= [[UIAlertView alloc] initWithTitle:@"Incompatible with Asset Library"
-															 message:@"The captured file cannot be written to the asset library. It is likely an audio-only file."
-															delegate:nil
-												   cancelButtonTitle:@"Okay"
-												   otherButtonTitles:nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Incompatible with Asset Library"
+                                                        message:@"The captured file cannot be written to the asset library. It is likely an audio-only file."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Okay"
+                                              otherButtonTitles:nil];
     [alertView show];
     [alertView release];        
 }
@@ -689,7 +726,7 @@
     
     self.screenshotWebView.delegate = self;
     
-    self.screenshotWebView.documentationURL     = [NSURL URLWithString:@"http://developer.apple.com/library/ios/#qa/qa2010/qa1714.html"];
+    self.screenshotWebView.documentationURL = [NSURL URLWithString:@"http://developer.apple.com/library/ios/#qa/qa2010/qa1714.html"];
     
 	self.screenshotWebView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:self.screenshotWebView animated:YES];
