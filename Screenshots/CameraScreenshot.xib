@@ -2,7 +2,7 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J3250</string>
+		<string key="IBDocument.SystemVersion">10J4138</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
@@ -54,6 +54,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{320, 480}</string>
 								<reference key="NSSuperview" ref="479468391"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="326001657"/>
 								<int key="IBUIContentMode">1</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -66,6 +67,7 @@
 						</object>
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="184854543"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="432530098"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -86,6 +88,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrameSize">{200, 300}</string>
 								<reference key="NSSuperview" ref="665453623"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="130541252"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -104,10 +107,12 @@
 						</object>
 						<string key="NSFrame">{{60, 90}, {200, 300}}</string>
 						<reference key="NSSuperview" ref="184854543"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="726892152"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MSAwIDAuNTAxOTYwODE0IDAAA</bytes>
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MSAwAA</bytes>
+							<reference key="NSCustomColorSpace" ref="1046473292"/>
 						</object>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -124,6 +129,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{5, 5}, {100, 150}}</string>
 								<reference key="NSSuperview" ref="326001657"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="147405928"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -140,6 +146,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{14, 119}, {83, 21}}</string>
 								<reference key="NSSuperview" ref="326001657"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="665453623"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -166,6 +173,7 @@
 						</object>
 						<string key="NSFrame">{{10, 70}, {110, 160}}</string>
 						<reference key="NSSuperview" ref="184854543"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="39328906"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -183,6 +191,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{112, 420}, {96, 40}}</string>
 						<reference key="NSSuperview" ref="184854543"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="738197240"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -210,6 +219,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{112, 420}, {96, 40}}</string>
 						<reference key="NSSuperview" ref="184854543"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="919534989"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -227,7 +237,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{282, 430}, {18, 19}}</string>
 						<reference key="NSSuperview" ref="184854543"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSWindow"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -249,6 +259,7 @@
 				</object>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="479468391"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -548,7 +559,139 @@
 			<nil key="sourceID"/>
 			<int key="maxID">49</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">AVFoundationScreenshotViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>scan</string>
+							<string>setupCamera</string>
+							<string>showScreenshotWebView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>scan</string>
+							<string>setupCamera</string>
+							<string>showScreenshotWebView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">scan</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">setupCamera</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">showScreenshotWebView</string>
+								<string key="candidateClassName">id</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backgroundImageView</string>
+							<string>cameraButton</string>
+							<string>mainView</string>
+							<string>overlayImageView</string>
+							<string>overlayView</string>
+							<string>scanButton</string>
+							<string>screenshotPictureImageView</string>
+							<string>screenshotPictureLabel</string>
+							<string>screenshotPictureView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
+							<string>UIButton</string>
+							<string>UIView</string>
+							<string>UIImageView</string>
+							<string>UIView</string>
+							<string>UIButton</string>
+							<string>UIImageView</string>
+							<string>UILabel</string>
+							<string>UIView</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>backgroundImageView</string>
+							<string>cameraButton</string>
+							<string>mainView</string>
+							<string>overlayImageView</string>
+							<string>overlayView</string>
+							<string>scanButton</string>
+							<string>screenshotPictureImageView</string>
+							<string>screenshotPictureLabel</string>
+							<string>screenshotPictureView</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">backgroundImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">cameraButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">mainView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">overlayImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">overlayView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">scanButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">screenshotPictureImageView</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">screenshotPictureLabel</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">screenshotPictureView</string>
+								<string key="candidateClassName">UIView</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AVFoundationScreenshotViewController.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">

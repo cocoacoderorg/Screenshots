@@ -55,7 +55,15 @@
     CADisplayLink               *displayLink;
     
 @public
-	UIView                      *mainView;
+//    CAReplicatorLayer *replicator;
+//	CAReplicatorLayer *replicatorX;
+//	CAReplicatorLayer *replicatorY;
+//	
+//    CALayer *rootLayer;
+//	CALayer *subLayer;
+    
+    UIView                      *mainView;
+    UIView *SecondView;
 	UIView                      *overlayView;
     UIImageView                 *backgroundImageView;
     
@@ -79,6 +87,7 @@
 @property (nonatomic)                               NSInteger                   animationFrameInterval;
 
 @property (nonatomic, retain)		IBOutlet		UIView                      *mainView;
+@property (nonatomic, retain) IBOutlet UIView *SecondView;
 @property (nonatomic, retain)		IBOutlet		UIView                      *overlayView;
 @property (nonatomic, retain)       IBOutlet        UIImageView                 *backgroundImageView;
 

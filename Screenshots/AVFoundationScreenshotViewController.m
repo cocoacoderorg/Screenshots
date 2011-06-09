@@ -230,10 +230,6 @@
 
 
 
-
-
-
-
 #pragma mark -
 #pragma mark Methods for OpenGL & UIKView Screenshots based on Q&A 1702, Q&A 1703, Q&A 1704, & Q&A 1714
 

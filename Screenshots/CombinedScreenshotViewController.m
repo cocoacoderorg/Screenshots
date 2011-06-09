@@ -146,6 +146,7 @@ enum
 
 @synthesize eaglView;
 @synthesize mainView;
+@synthesize SecondView;
 @synthesize overlayView;
 @synthesize backgroundImageView;
 
@@ -202,6 +203,7 @@ enum
     [capturedSession release];
     [previewLayer release];
 
+    [SecondView release];
     [super dealloc];
 }
 
@@ -344,6 +346,7 @@ enum
 
 - (void)viewDidUnload
 {
+    [self setSecondView:nil];
 	[super viewDidUnload];
     
     if (program) 
@@ -586,7 +589,48 @@ enum
     }
     
     self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-	[self.backgroundImageView.layer addSublayer:self.previewLayer];				
+    
+    
+    //
+    // Set the previewLayer as a sublayer of the backgroundImageView's layer
+    //
+	[self.backgroundImageView.layer addSublayer:self.previewLayer];	
+    
+
+    /*
+    
+    //Create the root layer
+	rootLayer = [CALayer layer];
+	
+    //Create the replicator layer
+	replicatorX = [CAReplicatorLayer layer];
+	
+	//Set the replicator's attributes
+	replicatorX.frame = self.backgroundImageView.frame;
+
+    //Create the second level of replicators
+	replicatorY = [CAReplicatorLayer layer];
+	
+    replicatorY.frame = self.SecondView.frame;
+    
+    //Create a sublayer
+	subLayer = [CALayer layer];
+    subLayer.frame = self.SecondView.frame;
+    subLayer = self.previewLayer;
+    
+    //Set up the sublayer/replicator hierarchy
+	[replicatorY addSublayer:subLayer];
+	[replicatorX addSublayer:replicatorY];
+	
+	//Add the replicator to the root layer
+	[rootLayer addSublayer:replicatorX];
+	
+	//Set the view's layer to the base layer
+	[self.backgroundImageView.layer addSublayer:rootLayer];
+	
+	//Force the view to update
+	//[self.backgroundImageView setNeedsDisplay:YES];
+     */
 }
 
 
@@ -753,20 +797,15 @@ enum
 	self.scanning = YES;
 	self.scanButton.selected = YES;
     
-    [UIView animateWithDuration:0.1 animations:^{
-        
-        
-        //
-        // Trigger the OpenGL screenshot and scream-out how much you love blocks!
-        //
-        self.openGLScreenshotImage = [self.eaglView openGLScreenshot];
-	}
-					 completion:^( BOOL finished ){
-						 if (finished) 
-						 {
-							 [self captureStillImage];
-						 }
-					 }];
+    
+    //
+    // Trigger the OpenGL screenshot and scream-out how much you love blocks!
+    //
+    self.openGLScreenshotImage = [self.eaglView openGLScreenshot];
+    
+    [self performSelector:@selector(captureStillImage) withObject:nil afterDelay:0.1];
+    
+    [self performSelector:@selector(displayScreenshotImage) withObject:nil afterDelay:0.5];
     
 }
 
