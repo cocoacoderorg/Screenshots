@@ -764,18 +764,13 @@ enum
     //
     // Create a AVCaputreStillImageOutput instance and add it to the session
 	//
-//	AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-//    self.capturedStillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+	AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
 	NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
-	[self.capturedStillImageOutput setOutputSettings:outputSettings];
+	[stillImageOutput setOutputSettings:outputSettings];
     [outputSettings release];
 	
 	
-//	[session addOutput:stillImageOutput];
-    [session addOutput:self.capturedStillImageOutput];
-    
-//    self.capturedStillImageOutput = stillImageOutput;
-//    [stillImageOutput release];
+	[session addOutput:stillImageOutput];
 	
 	
     //
@@ -790,10 +785,10 @@ enum
 	// KEY POINT: With this AVCaptureSession property, you can start/stop scanning to your hearts content, or 
 	// until the code you are trying to read has read it.
 	//
-//	self.capturedStillImageOutput = stillImageOutput;
-//    [stillImageOutput release];
-
-	self.capturedSession = session;
+	self.capturedStillImageOutput  = stillImageOutput;
+    [stillImageOutput release];
+    
+	self.capturedSession  = session;
     [session release];
 }
 
