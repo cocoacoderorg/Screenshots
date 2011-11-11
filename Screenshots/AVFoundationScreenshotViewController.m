@@ -506,7 +506,8 @@
 	{
         // Handling the error appropriately.
     }
-    [session addInput:input];
+    else
+        [session addInput:input];
 	
 	
     //
@@ -515,6 +516,7 @@
 	AVCaptureStillImageOutput *stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
 	NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
 	[stillImageOutput setOutputSettings:outputSettings];
+    [outputSettings release];
 	
 	
 	[session addOutput:stillImageOutput];
@@ -533,7 +535,10 @@
 	// until the code you are trying to read has read it.
 	//
 	self.capturedStillImageOutput  = stillImageOutput;
+    [stillImageOutput release];
+    
 	self.capturedSession  = session;
+    [session release];
 }
 
 
@@ -756,11 +761,10 @@
 
 - (IBAction)showScreenshotWebView
 {
-    if (!self.screenshotWebView) 
-    {
-        self.screenshotWebView = [[ScreenshotWebViewController alloc] initWithNibName:@"ScreenshotWebView" bundle:nil];
-        
-    }
+    ScreenshotWebViewController *webViewController = [[ScreenshotWebViewController alloc] initWithNibName:@"ScreenshotWebView" bundle:nil];
+    self.screenshotWebView = webViewController;
+    
+    [webViewController release];
     
     self.screenshotWebView.delegate = self;
     

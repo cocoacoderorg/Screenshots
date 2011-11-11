@@ -289,11 +289,10 @@
 
 - (IBAction)showScreenshotWebView
 {
-    if (!self.screenshotWebView) 
-    {
-        self.screenshotWebView = [[ScreenshotWebViewController alloc] initWithNibName:@"ScreenshotWebView" bundle:nil];
-
-    }
+    ScreenshotWebViewController *webViewController = [[ScreenshotWebViewController alloc] initWithNibName:@"ScreenshotWebView" bundle:nil];
+    self.screenshotWebView = webViewController;
+    
+    [webViewController release];
 
     self.screenshotWebView.delegate = self;
     
